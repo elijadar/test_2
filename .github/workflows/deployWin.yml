@@ -1,0 +1,22 @@
+name: Deploy with Windows
+on: [workflow_dispatch]
+jobs:
+    everything:
+        runs-on: windows-latest
+        steps:
+            - name: Get Code
+              uses: actions/checkout
+            - name: Install Node
+              uses: actions/setup-node
+              with:
+                node-version: '20'
+            - name: Install dependencies
+              run: npm ci
+            - name: Run lint
+              run: npm run lint
+            - name: Run tests
+              run: npm run test
+            - name: Run build
+              run: npm run build
+            - name: Run deploy
+              run: echo "Deploying..."

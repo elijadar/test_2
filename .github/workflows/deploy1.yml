@@ -1,5 +1,5 @@
 name: Deoploy Project in one job
-on: [push]
+on: [workflow_dispatch]
 jobs:
     everything:
         runs-on: ubuntu-latest
