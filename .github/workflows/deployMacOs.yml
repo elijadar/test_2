@@ -1,4 +1,4 @@
-name: Deploy with Windows
+name: Deploy with macOS
 on: [workflow_dispatch]
 jobs:
     everything:
