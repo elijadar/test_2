@@ -1,0 +1,50 @@
+name: Deoploy Project
+on: [push]
+jobs:
+    lint:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Get code
+            uses: actions/checkout@v4
+          - name: Install node
+            uses: actions/setup-node@v4
+            with:
+              node-version: '20'
+          - name: Install dependencies
+            run: npm ci
+          - name: Run tests
+            run: npm lint
+    test:
+        needs: [lint]
+        runs-on: ubuntu-latest
+        steps:
+          - name: Get code
+            uses: actions/checkout@v4
+          - name: Install node
+            uses: actions/setup-node@v4
+            with:
+              node-version: '20'
+          - name: Install dependencies
+            run: npm ci
+          - name: Run tests
+            run: npm test
+    build:
+        needs: [test]
+        runs-on: ubuntu-latest
+        steps:
+          - name: Get code
+            uses: actions/checkout@v4
+          - name: Install node
+            uses: actions/setup-node@v4
+            with:
+              node-version: '20'
+          - name: Install dependencies
+            run: npm ci
+          - name: Run build
+            run: npm build
+    deploy:
+        needs: [lint, test, build]
+        runs-on: ubuntu-latest
+        steps:
+            - name: Deploy project
+              run: echo "Deploying..."

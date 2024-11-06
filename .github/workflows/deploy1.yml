@@ -1,0 +1,22 @@
+name: Deoploy Project
+on: [push]
+jobs:
+    everything:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Get code
+            uses: actions/checkout@v4
+          - name: Install node
+            uses: actions/setup-node@v4
+            with:
+              node-version: '20'
+          - name: Install dependencies
+            run: npm ci
+          - name: Run tests
+            run: npm lint
+          - name: Run tests
+            run: npm test
+          - name: Run build
+            run: npm build
+          - name: Deploy project
+            run: echo "Deploying..."
